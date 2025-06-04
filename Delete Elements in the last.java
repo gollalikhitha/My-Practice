@@ -44,7 +44,7 @@ class linkedlist{
         }
     }
 }
-public class deleteelementsinthelast
+public class Deleteelementsinthelast
 {
 	public static void main(String[] args) {
 	    linkedlist l=new linkedlist();
