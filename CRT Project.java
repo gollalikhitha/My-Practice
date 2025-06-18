@@ -16,7 +16,7 @@ class User{
         transactions.add("Deposited ₹"+amount+",Current Balance: ₹"+balance);
     }
     boolean withdraw(double amount){
-        if (amount<=balance){
+        if(amount<=balance){
             balance-=amount;
             transactions.add("Withdrew ₹"+amount+",Current Balance: ₹" + balance);
             return true;
@@ -30,12 +30,12 @@ class User{
         transactions.add("Received ₹"+amount+"from"+fromUser+",Current Balance:₹"+balance);
     }
     boolean sendTransfer(User toUser, double amount){
-        if (amount<=balance) {
+        if(amount<=balance){
             balance-=amount;
             transactions.add("Sent ₹"+amount+"to"+toUser.username+",Current Balance:₹"+balance);
             toUser.receiveTransfer(username,amount);
             return true;
-        } else {
+        }else{
             transactions.add("Failed transfer of ₹"+amount+"to"+toUser.username+"(Insufficient funds)");
             return false;
         }
@@ -52,7 +52,7 @@ public class Main{
     static HashMap<String,User>users=new HashMap<>();
     public static void main(String[] args){
         System.out.println("===Welcome to CLI Bank System===");
-        while (true){
+        while(true){
             System.out.println("\n1.Login\n2.Sign Up\n3.Exit");
             System.out.print("Enter Choice:");
             int choice = sc.nextInt();
@@ -71,7 +71,7 @@ public class Main{
     static void signup() {
         System.out.print("Choose a username:");
         String username = sc.nextLine();
-        if (users.containsKey(username)) {
+        if(users.containsKey(username)) {
             System.out.println("Username already exists. Try logging in.");
             return;
         }
@@ -83,14 +83,14 @@ public class Main{
     static void login() {
         System.out.print("Enter username: ");
         String username = sc.nextLine();
-        if (!users.containsKey(username)) {
+        if(!users.containsKey(username)) {
             System.out.println("User doesn't exist. Please sign up first.");
             return;
         }
         System.out.print("Enter password: ");
         String password = sc.nextLine();
         User user = users.get(username);
-        if (!user.password.equals(password)) {
+        if(!user.password.equals(password)) {
             System.out.println("Incorrect password!");
             return;
         }
@@ -107,7 +107,7 @@ public class Main{
             System.out.println("5.Transfer Money");
             System.out.println("6.Logout");
             System.out.print("Choose an option:");
-            int choice = sc.nextInt();
+            int choice=sc.nextInt();
             sc.nextLine();
             switch (choice){
                 case 1->System.out.println("Current Balance: ₹"+currentUser.balance);
@@ -143,7 +143,7 @@ public class Main{
                     System.out.print("Enter amount to transfer: ₹");
                     double amount = sc.nextDouble();
                     sc.nextLine();
-                    if(currentUser.sendTransfer(users.get(toUser), amount)) {
+                    if(currentUser.sendTransfer(users.get(toUser), amount)){
                         System.out.println("Transfer successful.");
                     }else{
                         System.out.println("Transfer failed due to insufficient funds.");
@@ -153,7 +153,7 @@ public class Main{
                     System.out.println("Logged out.");
                     return;
                 }
-                default -> System.out.println("Invalid option!");
+                default->System.out.println("Invalid option!");
             }
         }
     }
